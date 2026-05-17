@@ -1,0 +1,952 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0F1A" />
+    <title>Aethos — Private Market Intelligence</title>
+    <meta
+      name="description"
+      content="A private Discord community of traders using proprietary liquidity algorithms, book-depth engines and AI-driven thesis generation. Institutional-grade research."
+    />
+
+    <meta property="og:title" content="Aethos — Private Market Intelligence" />
+    <meta property="og:description" content="The premium Aethos Discord. Institutional-grade research." />
+    <meta property="og:image" content="assets/aethosgradicon.png" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" href="assets/aethosgradicon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Inter is the cross-platform fallback for SF Pro Display -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- ─────────────── REUSABLE SVG DEFS ─────────────── -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="i-discord" viewBox="0 0 127.14 96.36">
+        <path fill="currentColor" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect x="6" y="11" width="12" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M13.5 2 4 14h6l-1.5 8L19 10h-6l.5-8Z"/>
+      </symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 7L13.5 15.5L8.5 10.5L2 17"/>
+        <path d="M16 7H22V13"/>
+      </symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.94 15.5A2 2 0 0 0 8.5 14.06L2.37 12.48a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06A2 2 0 0 0 14.06 15.5l-1.58 6.13a.5.5 0 0 1-.96 0Z"/>
+        <path d="M20 3v4"/>
+        <path d="M22 5h-4"/>
+      </symbol>
+      <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+        <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+        <path d="M10 9H8"/>
+        <path d="M16 13H8"/>
+        <path d="M16 17H8"/>
+      </symbol>
+      <symbol id="i-heatmap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+      </symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/>
+      </symbol>
+      <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 7v14"/>
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3Z"/>
+      </symbol>
+      <symbol id="i-hash" viewBox="0 0 24 24">
+        <path d="M5 9h14M5 15h14M10 4l-2 16M16 4l-2 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.654l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25h6.816l4.713 6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
+      </symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.61 0 4.28 2.37 4.28 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/>
+      </symbol>
+    </svg>
+
+    <!-- ─────────────── FLOATING PILL NAV ─────────────── -->
+    <header class="nav" data-nav>
+      <div class="nav__pill">
+        <a href="#" class="nav__brand" aria-label="Aethos — Private Market Intelligence">
+          <span class="wordmark nav__wordmark">AETHOS</span>
+        </a>
+
+        <nav class="nav__links" aria-label="Primary" data-nav-links>
+          <a href="#approach">About</a>
+          <a href="#systems">Channels</a>
+          <a href="#benefits">Benefits</a>
+          <a href="#faq">FAQ</a>
+          <span class="nav__indicator" aria-hidden="true"></span>
+        </nav>
+
+        <a href="#pricing" class="btn btn--primary btn--sm nav__cta">
+          <svg class="btn__icon" aria-hidden="true"><use href="#i-discord"/></svg>
+          Join Discord
+        </a>
+
+        <button class="nav__toggle" aria-label="Open menu" data-nav-toggle aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- ─────────────── HERO ─────────────── -->
+      <section class="hero">
+        <div class="hero__bg" aria-hidden="true">
+          <div class="hero__glow"></div>
+          <div class="hero__grid"></div>
+        </div>
+
+        <div class="container hero__inner">
+          <span class="badge" data-reveal>
+            <span class="badge__dot"></span>
+            Application only · The inner circle
+          </span>
+
+          <h1 class="display hero__title" data-reveal>
+            A high-level community of
+            <span class="grad">winners.</span>
+          </h1>
+
+          <p class="hero__sub" data-reveal>
+            Aethos is the inner circle of <strong>aggressive day traders</strong> who trade
+            what actually moves the market. While the rest are stuck behind
+            indicators, our members are <strong>stacking real profit</strong> — session after
+            session.
+          </p>
+
+          <div class="hero__ctas" data-reveal>
+            <a href="#pricing" class="btn btn--dark btn--lg">
+              <svg class="btn__icon" aria-hidden="true"><use href="#i-bolt"/></svg>
+              Start free 3-day trial
+            </a>
+            <a href="#systems" class="hero__sublink">
+              or see what's inside
+              <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+
+          <p class="hero__supporting" data-reveal>
+            Free 3-day trial · Then $89.99/month · Full membership by application
+          </p>
+        </div>
+      </section>
+
+      <!-- ─────────────── DISCORD MOCKUP (own section, full feature) ─────────────── -->
+      <section class="dmock-section">
+        <div class="container">
+          <aside class="dmock" aria-label="Preview of the Aethos Discord" data-reveal>
+            <div class="dmock__shell">
+              <div class="dmock__sidebar dmock__sidebar--channels">
+                <div class="dmock__server">
+                  <img src="assets/aethosgradicon.png" alt="" width="28" height="28" />
+                  <div class="dmock__server-text">
+                    <div class="dmock__server-name">AETHOS</div>
+                    <div class="dmock__server-meta">Private · 247 online</div>
+                  </div>
+                </div>
+
+                <div class="dmock__section">Market Intel</div>
+                <a class="dmock__ch">
+                  <svg class="dmock__hash"><use href="#i-hash"/></svg>
+                  market-pulse
+                </a>
+                <a class="dmock__ch dmock__ch--active">
+                  <svg class="dmock__hash"><use href="#i-hash"/></svg>
+                  ai-thesis-drops
+                  <svg class="dmock__lock"><use href="#i-lock"/></svg>
+                </a>
+                <a class="dmock__ch">
+                  <svg class="dmock__hash"><use href="#i-hash"/></svg>
+                  liquidity-alerts
+                  <svg class="dmock__lock"><use href="#i-lock"/></svg>
+                </a>
+
+                <div class="dmock__section">Desk</div>
+                <a class="dmock__ch">
+                  <svg class="dmock__hash"><use href="#i-hash"/></svg>
+                  futures-desk
+                  <svg class="dmock__lock"><use href="#i-lock"/></svg>
+                </a>
+                <a class="dmock__ch">
+                  <svg class="dmock__hash"><use href="#i-hash"/></svg>
+                  book-depth
+                  <svg class="dmock__lock"><use href="#i-lock"/></svg>
+                </a>
+              </div>
+
+              <div class="dmock__main">
+                <div class="dmock__header">
+                  <span class="dmock__hash-icon" aria-hidden="true">#</span>
+                  <span class="dmock__header-name">market-updates</span>
+                </div>
+
+                <p class="dmock__header-desc">
+                  Real-time market updates, setups and high-signal commentary.
+                </p>
+
+                <div class="dmock__feed">
+                  <div class="dmock__msg">
+                    <div class="dmock__avatar">
+                      <img src="assets/aethosgradicon.png" alt="" width="36" height="36" />
+                    </div>
+                    <div class="dmock__msg-body">
+                      <div class="dmock__msg-head">
+                        <span class="dmock__author">AETHOS</span>
+                        <span class="dmock__time">Today at 9:15 AM</span>
+                      </div>
+                      <p class="dmock__msg-title">Pre-market liquidity sweep complete</p>
+                      <p class="dmock__msg-text">
+                        ES futures showing institutional accumulation at 5,832.
+                        Bid stacking from yesterday's session is holding.
+                      </p>
+                      <div class="dmock__reactions">
+                        <span class="dmock__reaction"><span class="dmock__reaction-dot dmock__reaction-dot--1"></span> 24</span>
+                        <span class="dmock__reaction"><span class="dmock__reaction-dot dmock__reaction-dot--2"></span> 18</span>
+                        <span class="dmock__reaction"><span class="dmock__reaction-dot dmock__reaction-dot--3"></span> 11</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dmock__msg">
+                    <div class="dmock__avatar">
+                      <img src="assets/aethosgradicon.png" alt="" width="36" height="36" />
+                    </div>
+                    <div class="dmock__msg-body">
+                      <div class="dmock__msg-head">
+                        <span class="dmock__author">AETHOS</span>
+                        <span class="dmock__time">Today at 9:42 AM</span>
+                      </div>
+                      <p class="dmock__msg-title">Top setups this morning</p>
+                      <ul class="dmock__msg-list">
+                        <li>NVDA — long thesis activated, conviction 82</li>
+                        <li>ES — long bias above 5,832</li>
+                        <li>Crude — watch breakdown below 67.50</li>
+                      </ul>
+                      <div class="dmock__reactions">
+                        <span class="dmock__reaction"><span class="dmock__reaction-dot dmock__reaction-dot--1"></span> 32</span>
+                        <span class="dmock__reaction"><span class="dmock__reaction-dot dmock__reaction-dot--2"></span> 21</span>
+                        <span class="dmock__reaction"><span class="dmock__reaction-dot dmock__reaction-dot--3"></span> 13</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Members panel (right) -->
+              <div class="dmock__members">
+                <div class="dmock__members-head">
+                  <span class="dmock__dot-online"></span>
+                  Online · 247
+                </div>
+
+                <div class="dmock__members-group">Desk</div>
+                <div class="dmock__member">
+                  <span class="dmock__avatar-sm" style="background: linear-gradient(135deg, #6E8CFF, #9DB4FF);"></span>
+                  <div>
+                    <div class="dmock__member-name">Aethos Desk</div>
+                    <div class="dmock__member-role">Quant Analyst</div>
+                  </div>
+                </div>
+                <div class="dmock__member">
+                  <span class="dmock__avatar-sm" style="background: linear-gradient(135deg, #2E4BFF, #6E8CFF);"></span>
+                  <div>
+                    <div class="dmock__member-name">Research Lead</div>
+                    <div class="dmock__member-role">Thesis Drops</div>
+                  </div>
+                </div>
+
+                <div class="dmock__members-group">Members</div>
+                <div class="dmock__member">
+                  <span class="dmock__avatar-sm" style="background: linear-gradient(135deg, #9DB4FF, #F4ECD6);"></span>
+                  <div>
+                    <div class="dmock__member-name">M. Chen</div>
+                    <div class="dmock__member-role">Futures</div>
+                  </div>
+                </div>
+                <div class="dmock__member">
+                  <span class="dmock__avatar-sm" style="background: linear-gradient(135deg, #5B7BFF, #C8C4B0);"></span>
+                  <div>
+                    <div class="dmock__member-name">P. Rao</div>
+                    <div class="dmock__member-role">Equities</div>
+                  </div>
+                </div>
+                <div class="dmock__member">
+                  <span class="dmock__avatar-sm" style="background: linear-gradient(135deg, #4C6BFF, #9DB4FF);"></span>
+                  <div>
+                    <div class="dmock__member-name">J. Kovac</div>
+                    <div class="dmock__member-role">0DTE Options</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dmock__halo" aria-hidden="true"></div>
+          </aside>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── APPROACH / MANIFESTO (centered, stacked) ─────────────── -->
+      <section id="approach" class="section">
+        <div class="container container--narrow approach">
+          <p class="eyebrow approach__eyebrow" data-reveal>Why we win</p>
+
+          <h2 class="display approach__title" data-reveal>
+            Why trade indicators, patterns and setups when you can trade
+            <span class="grad">what actually moves price?</span>
+          </h2>
+
+          <p class="lede approach__lede" data-reveal>
+            Goldman Sachs, Citi, Citadel and Jane Street don't trade RSI.
+            The big firms move price with algorithms and volume. Aethos
+            members trade alongside that flow — not against it. While
+            other gurus are losing their shirts on lagging indicators,
+            our members are stacking real profit, session after session.
+          </p>
+
+          <p class="script-accent approach__script" data-reveal>— we trade with the firms, not against them.</p>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── SYSTEMS ─────────────── -->
+      <section id="systems" class="section">
+        <div class="container">
+          <div class="section__head section__head--left">
+            <p class="eyebrow" data-reveal>Proprietary systems</p>
+            <h2 class="display" data-reveal>
+              Built on <span class="grad">infrastructure</span>
+              <br />
+              retail doesn't see.
+            </h2>
+          </div>
+
+          <div class="systems-grid">
+            <!-- 01 Liquidity Algorithm — FEATURED with chart -->
+            <article class="sys-card sys-card--featured" data-reveal>
+              <div class="sys-card__text">
+                <div class="sys-card__head">
+                  <span class="sys-card__num grad">01</span>
+                </div>
+                <h3 class="sys-card__title">
+                  Aethos AI <span class="grad">Liquidity Engine</span>
+                </h3>
+                <p class="sys-card__body">
+                  Our proprietary AI tracks where the big algorithms are
+                  positioning — the same flow Goldman, Citi, Citadel and
+                  Jane Street use to move price. Members trade alongside it.
+                </p>
+              </div>
+              <figure class="sys-card__visual">
+                <img
+                  src="assets/liquidity-chart.png"
+                  alt="Aethos Liquidity Engine — chart showing how the obvious retail stop cluster sits above the true Aethos liquidity zone at the major swing low"
+                  loading="lazy"
+                />
+              </figure>
+            </article>
+
+            <!-- 02 Book-Depth Engine -->
+            <article class="sys-card" data-reveal>
+              <div class="sys-card__head">
+                <span class="sys-card__num grad">02</span>
+              </div>
+              <h3 class="sys-card__title">
+                Daily NQ/ES <span class="grad">Game Plans</span>
+              </h3>
+              <p class="sys-card__body">
+                <em>FoundAlpha</em> and our head researchers publish full
+                futures game plans before every open — levels, bias,
+                scenarios, execution. No guesswork.
+              </p>
+              <img src="assets/aethosgradicon.png" alt="" class="sys-card__watermark" aria-hidden="true" />
+            </article>
+
+            <!-- 03 AI Thesis Generator -->
+            <article class="sys-card" data-reveal>
+              <div class="sys-card__head">
+                <span class="sys-card__num grad">03</span>
+              </div>
+              <h3 class="sys-card__title">
+                Live <span class="grad">Options Picks</span>
+              </h3>
+              <p class="sys-card__body">
+                Tail real options trades from our analysts in real time.
+                Entries, sizing, exits — actually called. No paper picks,
+                no vague hints, no "I'm watching this."
+              </p>
+              <img src="assets/aethosgradicon.png" alt="" class="sys-card__watermark" aria-hidden="true" />
+            </article>
+
+            <!-- 04 Quant Futures Desk -->
+            <article class="sys-card" data-reveal>
+              <div class="sys-card__head">
+                <span class="sys-card__num grad">04</span>
+              </div>
+              <h3 class="sys-card__title">
+                Perpetual <span class="grad">Futures Setups</span>
+              </h3>
+              <p class="sys-card__body">
+                Live perp futures setups from operators who actually
+                trade them. See the structure, the trigger, the
+                management — the whole position, not just the call.
+              </p>
+              <img src="assets/aethosgradicon.png" alt="" class="sys-card__watermark" aria-hidden="true" />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── WHAT'S INCLUDED ─────────────── -->
+      <section class="section">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow" data-reveal>What's included</p>
+            <h2 class="display" data-reveal>
+              One membership.
+              <br />
+              <span class="grad">Every system.</span>
+            </h2>
+          </div>
+
+          <ul class="included" data-reveal>
+            <li>
+              <div>
+                <div class="included__name">Aethos AI Liquidity Engine</div>
+                <div class="included__sub">Proprietary AI tracking the flow that moves price</div>
+              </div>
+              <span class="included__tag">Live</span>
+            </li>
+            <li>
+              <div>
+                <div class="included__name">Daily NQ/ES game plans</div>
+                <div class="included__sub">Full futures plans from FoundAlpha before every open</div>
+              </div>
+              <span class="included__tag">Pre-open</span>
+            </li>
+            <li>
+              <div>
+                <div class="included__name">Live options picks to tail</div>
+                <div class="included__sub">Real trades from our analysts — entry, sizing, exit</div>
+              </div>
+              <span class="included__tag">Real-time</span>
+            </li>
+            <li>
+              <div>
+                <div class="included__name">Perpetual futures setups</div>
+                <div class="included__sub">Live perp positions from operators who actually trade them</div>
+              </div>
+              <span class="included__tag">Daily</span>
+            </li>
+            <li>
+              <div>
+                <div class="included__name">Private inner-circle chat</div>
+                <div class="included__sub">Direct access to the desk and other serious operators</div>
+              </div>
+              <span class="included__tag">24/7</span>
+            </li>
+            <li>
+              <div>
+                <div class="included__name">Members-only research vault</div>
+                <div class="included__sub">Frameworks, archives, deep-dives — the full playbook</div>
+              </div>
+              <span class="included__tag">Ongoing</span>
+            </li>
+            <li>
+              <div>
+                <div class="included__name">Onboarding &amp; systems walkthrough</div>
+                <div class="included__sub">Get oriented on every tool from day one</div>
+              </div>
+              <span class="included__tag">Day 1</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── PROOF / RESULTS (placeholders for real screenshots) ─────────────── -->
+      <section class="section proof-section">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow" data-reveal>Real members. Real profits.</p>
+            <h2 class="display" data-reveal>
+              Members are stacking
+              <br />
+              <span class="grad">real money.</span>
+            </h2>
+          </div>
+
+          <div class="proof__grid">
+            <article class="proof__card" data-reveal>
+              <div class="proof__amount"><span class="grad">+$X,XXX</span></div>
+              <div class="proof__screenshot" aria-hidden="true">
+                <span class="proof__placeholder">Replace with profit screenshot</span>
+              </div>
+              <blockquote class="proof__quote">
+                "Placeholder testimonial — drop a real member quote here describing
+                a winning session."
+              </blockquote>
+              <div class="proof__author">
+                <span class="proof__author-name">Member Name</span>
+                <span class="proof__author-role">NQ futures</span>
+              </div>
+            </article>
+
+            <article class="proof__card" data-reveal>
+              <div class="proof__amount"><span class="grad">+$X,XXX</span></div>
+              <div class="proof__screenshot" aria-hidden="true">
+                <span class="proof__placeholder">Replace with broker statement</span>
+              </div>
+              <blockquote class="proof__quote">
+                "Placeholder testimonial — second member quote about tailing
+                options picks or game plan."
+              </blockquote>
+              <div class="proof__author">
+                <span class="proof__author-name">Member Name</span>
+                <span class="proof__author-role">0DTE options</span>
+              </div>
+            </article>
+
+            <article class="proof__card" data-reveal>
+              <div class="proof__amount"><span class="grad">+$X,XXX</span></div>
+              <div class="proof__screenshot" aria-hidden="true">
+                <span class="proof__placeholder">Replace with profit screenshot</span>
+              </div>
+              <blockquote class="proof__quote">
+                "Placeholder testimonial — third member quote, perp futures or
+                liquidity-engine win."
+              </blockquote>
+              <div class="proof__author">
+                <span class="proof__author-name">Member Name</span>
+                <span class="proof__author-role">Perp futures</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── COMPARISON TABLE ─────────────── -->
+      <section id="benefits" class="section compare-section">
+        <div class="container">
+          <div class="section__head">
+            <p class="eyebrow" data-reveal>Why Aethos</p>
+            <h2 class="display" data-reveal>
+              Most communities sell excitement.
+              <br />
+              <span class="grad">Aethos sells edge.</span>
+            </h2>
+          </div>
+
+          <div class="compare" data-reveal>
+            <div class="compare__head">
+              <div class="compare__label-cell"></div>
+              <div class="compare__col compare__col--us">
+                <img src="assets/aethosgradicon.png" alt="" width="22" height="22" />
+                Aethos
+              </div>
+              <div class="compare__col compare__col--them">
+                Other trading Discords
+              </div>
+            </div>
+
+            <div class="compare__row">
+              <div class="compare__label">Proprietary liquidity &amp; book-depth algorithms</div>
+              <div class="compare__val compare__val--us">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="compare__val compare__val--them">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+
+            <div class="compare__row">
+              <div class="compare__label">AI-driven thesis generation with conviction scoring</div>
+              <div class="compare__val compare__val--us">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="compare__val compare__val--them">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+
+            <div class="compare__row">
+              <div class="compare__label">Dedicated quant-level futures desk</div>
+              <div class="compare__val compare__val--us">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="compare__val compare__val--them compare__val--meh">
+                Rare
+              </div>
+            </div>
+
+            <div class="compare__row">
+              <div class="compare__label">Defined entry, target and invalidation on every call</div>
+              <div class="compare__val compare__val--us">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="compare__val compare__val--them compare__val--meh">
+                Inconsistent
+              </div>
+            </div>
+
+            <div class="compare__row">
+              <div class="compare__label">Vetted, math-backed signal — not hype</div>
+              <div class="compare__val compare__val--us">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4 4 10-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="compare__val compare__val--them">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── PRICING ─────────────── -->
+      <section id="pricing" class="section pricing-section">
+        <div class="pricing-section__halo" aria-hidden="true"></div>
+        <div class="container split__grid">
+          <div class="split__head" data-reveal>
+            <p class="eyebrow">Membership</p>
+            <h2 class="display split__title">
+              Start your
+              <br />
+              <span class="grad">free 3-day trial.</span>
+            </h2>
+            <p class="lede lede--sub">
+              Full access for 3 days. See the systems, the desk, the wins.
+              Then $89.99/month if you want to stay. Cancel anytime.
+            </p>
+          </div>
+
+          <div class="split__body">
+          <div class="pricing" data-reveal>
+            <div class="pricing__head">
+              <div>
+                <span class="pricing__trial pricing__trial--badge">
+                  <span class="pricing__trial-dot" aria-hidden="true"></span>
+                  Instant access
+                </span>
+                <h3 class="pricing__name">Aethos Core</h3>
+                <p class="pricing__lede">
+                  Full access to the private desk, proprietary systems,
+                  AI thesis generation, futures analysis, research vault,
+                  and serious member community.
+                </p>
+              </div>
+              <div class="pricing__price">
+                <div class="pricing__then">
+                  <span class="pricing__currency">$</span>
+                  <strong class="grad">89.99</strong>
+                  <span class="pricing__per">/ mo after</span>
+                </div>
+              </div>
+            </div>
+
+            <ul class="pricing__list">
+              <li>
+                <svg class="pricing__check" aria-hidden="true"><use href="#i-trend"/></svg>
+                Live liquidity &amp; accumulation alerts
+              </li>
+              <li>
+                <svg class="pricing__check" aria-hidden="true"><use href="#i-spark"/></svg>
+                AI thesis drops with conviction scoring
+              </li>
+              <li>
+                <svg class="pricing__check" aria-hidden="true"><use href="#i-doc"/></svg>
+                Pre-open quant futures desk note
+              </li>
+              <li>
+                <svg class="pricing__check" aria-hidden="true"><use href="#i-heatmap"/></svg>
+                Book-depth heatmap access
+              </li>
+              <li>
+                <svg class="pricing__check" aria-hidden="true"><use href="#i-chat"/></svg>
+                Private member community &amp; desk chat
+              </li>
+              <li>
+                <svg class="pricing__check" aria-hidden="true"><use href="#i-book"/></svg>
+                Onboarding &amp; full research vault
+              </li>
+            </ul>
+
+            <a href="#" class="btn btn--dark btn--lg btn--block">
+              <svg class="btn__icon" aria-hidden="true"><use href="#i-bolt"/></svg>
+              Start free 3-day trial
+            </a>
+            <p class="pricing__fine">
+              <svg class="pricing__fine-icon" aria-hidden="true"><use href="#i-lock"/></svg>
+              Cancel anytime · No card required for trial · Billed monthly
+            </p>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider" aria-hidden="true" />
+
+      <!-- ─────────────── FAQ ─────────────── -->
+      <section id="faq" class="section">
+        <div class="container split__grid">
+          <div class="split__head split__head--sticky" data-reveal>
+            <p class="eyebrow">FAQ</p>
+            <h2 class="display split__title">
+              Common
+              <br />
+              <span class="grad">questions.</span>
+            </h2>
+            <p class="script-accent">— answered.</p>
+          </div>
+
+          <div class="split__body">
+          <div class="faq" data-faq>
+            <details class="faq__item">
+              <summary>
+                <span>Is this financial advice?</span>
+                <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="faq__body">
+                No. Aethos publishes educational analysis, research and trade
+                ideas for informational purposes only. Nothing inside the
+                community is personalized financial advice. You are responsible
+                for your own trading decisions.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary>
+                <span>Who is Aethos for?</span>
+                <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="faq__body">
+                Active traders and investors who want to operate with structure
+                — options traders, futures traders, swing equity investors,
+                and anyone tired of gambling-style "calls" and ready for
+                math-backed conviction.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary>
+                <span>What do I need to get started?</span>
+                <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="faq__body">
+                A brokerage account, a Discord account, and a willingness to
+                follow a process. Onboarding is included so you can use every
+                system from day one.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary>
+                <span>Can I cancel anytime?</span>
+                <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="faq__body">
+                Yes. Membership is month-to-month with no contracts and no
+                cancellation fees.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary>
+                <span>How is this different from other trading Discords?</span>
+                <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="faq__body">
+                Most trading rooms are entertainment. Aethos is infrastructure.
+                We build proprietary tools normally reserved for prop desks —
+                liquidity engines, depth-of-book analytics, AI thesis
+                generation — and deliver the outputs to members alongside
+                structured, defined-risk ideas.
+              </div>
+            </details>
+
+            <details class="faq__item">
+              <summary>
+                <span>Is there a free option?</span>
+                <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </summary>
+              <div class="faq__body">
+                A free Aethos Discord exists if you want to get a feel for the
+                community first. It's quieter than the member desk and doesn't
+                include the proprietary systems — the link is at the bottom of
+                this page.
+              </div>
+            </details>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────── FINAL PAID CTA (horizontal card) ─────────────── -->
+      <section class="cta">
+        <div class="container">
+          <div class="cta-card" data-reveal>
+            <div class="cta-card__texture" aria-hidden="true"></div>
+            <div class="cta-card__noise" aria-hidden="true"></div>
+            <div class="cta-card__orb cta-card__orb--a" aria-hidden="true"></div>
+            <div class="cta-card__orb cta-card__orb--b" aria-hidden="true"></div>
+
+            <div class="cta-card__content">
+              <p class="eyebrow eyebrow--bright">Better outcomes need a better framework.</p>
+              <h2 class="cta-card__title">Start your <span class="grad">free trial.</span></h2>
+              <p class="cta-card__body">
+                Full access to the Aethos desk for 3 days. Then $89.99/month. Cancel anytime.
+              </p>
+            </div>
+
+            <div class="cta-card__action">
+              <a href="#pricing" class="btn btn--primary btn--lg">
+                <svg class="btn__icon" aria-hidden="true"><use href="#i-bolt"/></svg>
+                Start free 3-day trial
+              </a>
+              <p class="cta-card__fine">
+                <svg class="cta-card__fine-icon" aria-hidden="true"><use href="#i-lock"/></svg>
+                Private inner circle
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─────────────── SUBORDINATED FREE DISCORD ─────────────── -->
+      <div class="free">
+        <div class="container container--narrow">
+          <p class="free__line">
+            Not ready?
+            <a href="#" class="free__link">
+              <svg aria-hidden="true"><use href="#i-discord"/></svg>
+              Join the free Aethos Discord
+              <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- ─────────────── FOOTER (Kresna-style) ─────────────── -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <!-- Left: branded card -->
+          <div class="footer__brand-card">
+            <a href="#" class="footer__brand-header" aria-label="Aethos home">
+              <img src="assets/aethosgradicon.png" alt="" width="32" height="32" loading="lazy" />
+              <span class="wordmark">AETHOS</span>
+            </a>
+            <div class="footer__brand-bottom">
+              <p class="footer__brand-tagline">
+                Private market intelligence,
+                <br />
+                delivered daily.
+              </p>
+              <div class="footer__brand-social">
+                <p class="footer__brand-stay">Stay in touch</p>
+                <div class="footer__social">
+                  <a href="#" aria-label="Discord" class="footer__icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-discord"/></svg>
+                  </a>
+                  <a href="#" aria-label="LinkedIn" class="footer__icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-linkedin"/></svg>
+                  </a>
+                  <a href="#" aria-label="X" class="footer__icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-x"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle: link columns -->
+          <div class="footer__nav">
+            <div class="footer__nav-col">
+              <p class="footer__nav-title">Navigation</p>
+              <a href="#approach">About</a>
+              <a href="#systems">Channels</a>
+              <a href="#benefits">Benefits</a>
+              <a href="#pricing">Pricing</a>
+              <a href="#faq">FAQ</a>
+            </div>
+            <div class="footer__nav-col">
+              <p class="footer__nav-title">Company</p>
+              <a href="#">Free Discord</a>
+              <a href="#">Terms &amp; Conditions</a>
+              <a href="#">Privacy Policy</a>
+            </div>
+          </div>
+
+          <!-- Right: subscribe -->
+          <div class="footer__sub">
+            <p class="footer__sub-eyebrow">Market moves fast.</p>
+            <p class="footer__sub-title">Stay ahead with Aethos.</p>
+            <form class="footer__email" onsubmit="event.preventDefault()">
+              <input type="email" placeholder="Enter email address" aria-label="Email address" />
+              <button type="submit">Subscribe</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Big wordmark watermark -->
+        <div class="footer__watermark" aria-hidden="true">AETHOS</div>
+
+        <p class="footer__disclaimer">
+          Aethos is an educational community and research service. All analysis,
+          ideas and content are for informational and educational purposes only
+          and do not constitute financial, investment, tax or legal advice.
+          Trading and investing involve substantial risk of loss. Past
+          performance does not guarantee future results.
+        </p>
+
+        <div class="footer__bottom">
+          <span>© <span data-year>2026</span> Aethos. All rights reserved.</span>
+          <span class="footer__tag">Private Market Intelligence</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
